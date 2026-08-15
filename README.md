@@ -191,12 +191,34 @@ A terceira etapa mostra a distribuição dos dados, a relação entre idade e va
 
 ### 4. Monitoramento de estabilidade (PSI)
 
-Essa tela avalia se a distribuição dos scores está estável em relação à base de treinamento. Ela mostra se o modelo continua confiável ou se precisa de retraining.
+Essa tela avalia se a distribuição dos scores está estável em relação à base de treinamento. Ela mostra se o modelo continua confiável ou se precisa de retraining. O **PSI (Population Stability Index)** é uma métrica crítica em modelos de risco que detecta mudanças na distribuição dos dados em produção.
 
-- PSI como indicador de estabilidade
-- status: estável, atenção ou crítico
-- comparação entre treino e nova safra
-- sinalização para manutenção do modelo em produção
+<div align="center">
+  <img src="plots/psi_monitoring.png" alt="Monitoramento de PSI e estabilidade do modelo" width="900" />
+</div>
+
+**O que você vê na tela:**
+
+1. **Resultado do PSI** (com status visual)
+   - Status ESTÁVEL (PSI < 0.10): Modelo continua confiável
+   - Status ATENÇÃO (0.10 ≤ PSI ≤ 0.25): Drift detectado, monitorar de perto
+   - Status CRÍTICO (PSI > 0.25): Retraining urgente recomendado
+
+2. **Tabela por Bucket de Decil**
+   - Comparação das distribuições esperada (treino) vs atual (produção)
+   - PSI parcial por faixa de score
+   - Identifica em quais faixas ocorrem as maiores mudanças
+
+3. **Gráfico de Comparação de Distribuição**
+   - Histograma azul: Scores da base de treinamento (esperado)
+   - Histograma laranja: Scores em produção (atual)
+   - Sobreposição visual mostra deslocamento da distribuição
+
+**Por que é importante:**
+- Detecta **data drift** (mudança na natureza dos dados)
+- Identifica **concept drift** (mudança no relacionamento entre features e target)
+- Permite retraining proativo antes que o modelo degrade
+- Garante conformidade regulatória em sistemas de crédito
 
 ### 5. API de avaliação de risco
 
