@@ -46,7 +46,67 @@ O projeto foi pensado para demonstrar um fluxo realista de ML em produção, inc
 - API REST para avaliação de crédito
 - dashboard para apoio à decisão
 
-## Métricas do modelo
+## Dashboard em Produção
+
+O projeto inclui um dashboard interativo que funciona em tempo real para avaliação de crédito. A interface é dividida em dois painéis principais:
+
+**Painel Esquerdo — Formulário de Entrada**
+Campos para capturar informações do cliente:
+- Idade do cliente
+- Gênero (Masculino/Feminino)
+- Nível de qualificação do emprego
+- Tipo de moradia (própria, aluguel, etc)
+- Saldo da conta poupança
+- Saldo da conta corrente
+- Valor solicitado de crédito (€)
+- Prazo de pagamento (meses)
+- Finalidade do empréstimo (carro, casa, negócio, etc)
+
+**Painel Direito — Resultado da Análise**
+1. **Decisão Final** (topo): Status de aprovação em formato de alerta
+   - APROVADO (verde)
+   - ALERTA / ANÁLISE MANUAL (amarelo)
+   - RISCO ELEVADO (vermelho)
+
+2. **Score de Crédito** (Escala 300–850)
+   - Score numérico do cliente
+   - Barra de progresso visual
+   - Comparação com linha de base
+
+3. **Métricas de Risco de Crédito** (Basileia III)
+   - **PD** (Probabilidade de Inadimplência): Chance estimada de default
+   - **LGD** (Perda Dada a Inadimplência): Percentual de perda esperada
+   - **EAD** (Exposição ao Risco): Montante em risco
+   - **Perda Esperada**: Valor financeiro esperado de perda
+
+4. **Explicabilidade (SHAP XAI)**
+   - Gráfico de barras com fatores que aumentam (vermelho) ou diminuem (verde) o risco
+   - Exemplo: Housing_own, Age, Checking account, Duration
+   - Facilita a justificativa e a conformidade regulatória
+
+**Como usar:**
+```bash
+docker-compose up --build
+```
+Depois acesse `http://localhost:8501` (Streamlit) ou `http://localhost:8000` (FastAPI).
+
+### Captura Visual do Dashboard em Ação
+
+<div align="center">
+  <img src="plots/dashboard_screenshot.png" alt="Dashboard de avaliação de crédito funcionando" width="1000" />
+</div>
+
+**O que você vê na tela:**
+- **Esquerda**: Formulário interativo onde você insere os dados do cliente (idade, gênero, saldo em conta, valor do empréstimo, prazo, etc)
+- **Direita**: Resultado da avaliação em tempo real:
+  - Decisão final (APROVADO, ALERTA ou RISCO ELEVADO) em destaque visual
+  - Score de crédito na escala 300–850
+  - Métricas regulatórias (PD, LGD, EAD e Perda Esperada)
+  - Gráfico SHAP mostrando quais fatores aumentam ou diminuem o risco
+
+Basta inserir os dados e clicar em **"Avaliar Proposta de Crédito"** para ver o resultado instantaneamente. A explicabilidade via SHAP garante que a decisão seja interpretável para conformidade regulatória e análise de negócio.
+
+## Métricas do Modelo
 
 Os modelos avaliados foram Regressão Logística, Random Forest e XGBoost. O melhor desempenho ficou com o XGBoost, conforme métrica de ROC-AUC e recall para maus pagadores.
 
