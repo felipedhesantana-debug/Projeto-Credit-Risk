@@ -5,24 +5,41 @@
   <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python" alt="Python" />
   <img src="https://img.shields.io/badge/ML-Credit%20Risk-4B8BBE?style=for-the-badge" alt="Credit Risk" />
   <img src="https://img.shields.io/badge/Status-Ready-2EA043?style=for-the-badge" alt="Ready" />
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License" />
 
 </div>
 
-## Sobre o projeto
+<p align="center">
+  <strong>Plataforma de avaliação de risco de crédito com Machine Learning, API e dashboard.</strong>
+</p>
 
-Este repositório contém um pipeline completo de Machine Learning para avaliação e previsão de risco de crédito, utilizando o dataset de crédito alemão. O objetivo é classificar clientes em perfis de risco e apoiar decisões de crédito com base em indicadores financeiros e comportamentais.
+## Visão geral
 
-O projeto inclui:
-- análise exploratória de dados
-- tratamento de variáveis e preprocessing
-- treinamento de múltiplos modelos
-- comparação de métricas de avaliação
-- inferência em novos perfis
-- API e dashboard para uso prático
+Este repositório implementa um pipeline completo para avaliação de risco de crédito usando o dataset alemão de crédito. A solução combina análise exploratória, pré-processamento, treinamento de modelos, explicabilidade e uma interface para uso prático.
 
-## Modelo e métricas
+O projeto foi pensado para demonstrar um fluxo realista de ML em produção, incluindo:
 
-Os modelos avaliados incluem Regressão Logística, Random Forest e XGBoost. A comparação foi feita com foco em métricas relevantes para risco de crédito, especialmente recall para maus pagadores e área sob a curva ROC.
+- análise exploratória de dados (EDA)
+- tratamento de variáveis e encoding
+- comparação de modelos de classificação
+- métricas de negócio e performance
+- inferência em novas propostas de crédito
+- API REST e dashboard para visualização
+
+## Stack principal
+
+- Python
+- Pandas
+- Scikit-learn
+- XGBoost
+- Matplotlib / Seaborn
+- FastAPI
+- Streamlit / Dash
+- Docker
+
+## Métricas do modelo
+
+Os modelos avaliados foram Regressão Logística, Random Forest e XGBoost. O melhor desempenho ficou com o XGBoost, conforme métrica de ROC-AUC e recall para maus pagadores.
 
 | Modelo | ROC-AUC | Recall (maus pagadores) |
 |---|---:|---:|
@@ -30,68 +47,77 @@ Os modelos avaliados incluem Regressão Logística, Random Forest e XGBoost. A c
 | Random Forest | 0.7739 | - |
 | Regressão Logística | 0.7607 | - |
 
-## Estrutura do repositório
+## Arquitetura do projeto
 
 ```text
 Projeto Credit Risk/
 ├── german_credit_data.csv          # Dataset original
 ├── eda.py                          # Análise exploratória de dados
-├── predict.py                      # Simulação de inferência e predição
+├── predict.py                      # Simulação e inferência em novos perfis
 ├── requirements.txt                # Dependências do projeto
 ├── Dockerfile                      # Container da aplicação
 ├── docker-compose.yml              # Orquestração dos serviços
 ├── README.md                       # Documentação do projeto
+├── LICENSE                         # Licença do projeto
 ├── .gitignore                      # Arquivos ignorados pelo Git
 ├── models/
-│   └── credit_risk_model.joblib   # Modelo treinado + pré-processador
+│   └── credit_risk_model.joblib   # Modelo treinado + preprocessador
 ├── plots/
-│   ├── eda_overview.png            # Visualizações da EDA
-│   ├── model_evaluation.png        # Métricas e avaliação do modelo
-│   └── feature_importance.png      # Importância das variáveis
+│   ├── eda_overview.png            # Gráficos de EDA
+│   ├── model_evaluation.png        # ROC e matriz de confusão
+│   └── feature_importance.png      # Importância das features
 ├── src/
-│   ├── preprocessing.py           # Pipeline de preprocessing
-│   ├── train_model.py             # Treinamento e validação
-│   ├── monitoring.py              # Monitoramento
-│   └── risk_engine.py             # Motor de risco e lógica de decisão
+│   ├── preprocessing.py           # Pipeline de preprocessamento
+│   ├── train_model.py             # Treinamento, validação e salvamento
+│   ├── monitoring.py              # Monitoramento de estabilidade
+│   └── risk_engine.py             # Motor de risco e decisões
 ├── app/
-│   ├── api.py                     # API para inferência
+│   ├── api.py                     # API de inferência
 │   └── dashboard.py               # Dashboard interativo
-└── LICENSE                        # Licença do projeto (se aplicável)
+└── .agents/
+    └── skills/
 ```
 
 ## Como executar
 
-### 1. Instalar dependências
+### 1. Clonar o repositório
+
+```bash
+git clone git@github.com:felipedhesantana-debug/Projeto-Credit-Risk.git
+cd Projeto-Credit-Risk
+```
+
+### 2. Instalar dependências
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Executar a análise exploratória
+### 3. Executar EDA
 
 ```bash
 python eda.py
 ```
 
-### 3. Treinar o modelo
+### 4. Treinar o modelo
 
 ```bash
 PYTHONPATH=src python src/train_model.py
 ```
 
-### 4. Fazer predição em novos perfis
+### 5. Fazer predição em novos perfis
 
 ```bash
 PYTHONPATH=src python predict.py
 ```
 
-### 5. Executar a API / dashboard
+### 6. Executar a API ou dashboard
 
 ```bash
 docker-compose up --build
 ```
 
-Ou, em modo direto:
+Ou execute diretamente:
 
 ```bash
 python app/api.py
@@ -120,20 +146,18 @@ print(resultado)
 
 ## Casos de uso
 
-- análise de risco de crédito para fintechs
+- avaliação de crédito para fintechs e bancos
 - apoio à decisão de aprovação/reprovação
-- benchmark de modelos em problemas de classificação binária
-- prototipagem para sistemas de crédito automatizados
+- benchmarking de modelos em classificação binária
+- prototipagem de sistemas de credit scoring
+- visualização de risco e monitoramento de população
 
-## Tecnologias utilizadas
+## Roadmap
 
-- Python
-- Pandas
-- Scikit-learn
-- XGBoost
-- Matplotlib / Seaborn
-- Docker
-- GitHub
+- melhorar explicabilidade com SHAP e análise de fatores
+- adicionar testes automatizados
+- evoluir para deploy em nuvem
+- criar monitoramento de drift e PSI
 
 ## Autor
 
@@ -141,5 +165,5 @@ Felipe Santana
 
 ## Licença
 
-Este projeto está disponível para uso educacional e de estudo. Ajuste a licença conforme a sua necessidade antes de uso comercial.
+Este projeto está licenciado sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
