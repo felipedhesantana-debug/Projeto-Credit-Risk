@@ -78,6 +78,55 @@ Projeto Credit Risk/
     └── skills/
 ```
 
+## Capturas e explicação das telas
+
+Abaixo estão os principais painéis do projeto e o que cada um representa na solução de risco de crédito.
+
+### 1. Resultado da análise de risco
+
+A primeira tela mostra o score final do cliente, a faixa de decisão, o valor de pontuação e os indicadores principais de risco. Ela centraliza a decisão final: se o cliente está em zona de aprovação, atenção ou risco elevado.
+
+- score geral do cliente
+- classificação de decisão (aprovado, atenção ou risco)
+- indicadores de crédito e exposição
+- visão rápida para tomada de decisão de negócio
+
+### 2. Explicabilidade do modelo (SHAP)
+
+A segunda tela destaca os fatores que mais aumentam ou reduzem o risco do cliente. Esse gráfico é importante porque mostra, de forma interpretável, por que a predição foi feita.
+
+- variáveis com impacto positivo e negativo sobre o risco
+- exemplo de fatores como duração do crédito, housing, checking account e credit amount
+- apoio para análise de negócio e conformidade
+
+### 3. EDA e análise exploratória
+
+A terceira etapa mostra a distribuição dos dados, a relação entre idade e valor do crédito, e a comparação por categoria de risco. Essa tela ajuda a entender a base e detectar padrões antes do treinamento do modelo.
+
+- distribuição de bons e maus pagadores
+- relação entre idade e valor do crédito
+- comportamento por tipo de propósito do empréstimo
+- análise visual da base e dos padrões de risco
+
+### 4. Monitoramento de estabilidade (PSI)
+
+Essa tela avalia se a distribuição dos scores está estável em relação à base de treinamento. Ela mostra se o modelo continua confiável ou se precisa de retraining.
+
+- PSI como indicador de estabilidade
+- status: estável, atenção ou crítico
+- comparação entre treino e nova safra
+- sinalização para manutenção do modelo em produção
+
+### 5. API de avaliação de risco
+
+A última parte mostra a interface da API para chamar o modelo em produção. Ela expõe endpoints para:
+
+- avaliação de crédito de um cliente
+- cálculo de PSI para monitoramento populacional
+- documentação interativa dos modelos
+
+Essas telas deixam claro que o projeto não é apenas um modelo em notebook: é um fluxo real de produto de risco de crédito, com visão analítica, explicabilidade, monitoramento e integração via API.
+
 ## Como executar
 
 ### 1. Clonar o repositório
