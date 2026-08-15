@@ -230,6 +230,68 @@ A última parte mostra a interface da API para chamar o modelo em produção. El
 
 Essas telas deixam claro que o projeto não é apenas um modelo em notebook: é um fluxo real de produto de risco de crédito, com visão analítica, explicabilidade, monitoramento e integração via API.
 
+### 6. Matriz de Confusão e Desempenho do Modelo
+
+A matriz de confusão mostra a distribuição de acertos e erros do modelo em cada classe. Ela é essencial para avaliar a capacidade de discriminação entre bons e maus pagadores.
+
+<div align="center">
+  <img src="plots/confusion_matrix.png" alt="Matriz de confusão do modelo XGBoost" width="850" />
+</div>
+
+**Métricas interpretadas:**
+- **TN (Verdadeiros Negativos)**: Bons pagadores corretamente identificados
+- **FP (Falsos Positivos)**: Bons pagadores incorretamente marcados como maus (custo: rejeição incorreta)
+- **FN (Falsos Negativos)**: Maus pagadores não detectados (custo: risco de default)
+- **TP (Verdadeiros Positivos)**: Maus pagadores corretamente identificados
+
+As métricas exibidas (Acurácia, Precisão, Recall, F1-Score) ajudam a definir o threshold ótimo de decisão baseado no apetite ao risco da instituição.
+
+### 7. Curva ROC e Avaliação do Desempenho
+
+A curva ROC (Receiver Operating Characteristic) mostra o trade-off entre Taxa de Verdadeiros Positivos e Taxa de Falsos Positivos em diferentes thresholds. A área sob a curva (AUC/ROC-AUC) é a métrica de desempenho geral.
+
+<div align="center">
+  <img src="plots/roc_curve.png" alt="Curva ROC do modelo XGBoost" width="850" />
+</div>
+
+**Interpretação:**
+- **AUC = 0.50**: Classificador aleatório (linha diagonal)
+- **AUC = 0.7850** (nosso modelo): Bom desempenho discriminatório
+- **AUC = 1.00**: Classificador perfeito
+
+O ponto ótimo na curva indica o threshold recomendado para maximizar a eficiência operacional e a captura de risco.
+
+### 8. Arquitetura de API e Endpoints
+
+A API expõe endpoints RESTful para integração em produção, permitindo que outros sistemas façam predições em tempo real.
+
+<div align="center">
+  <img src="plots/api_architecture.png" alt="Arquitetura de API e endpoints disponíveis" width="950" />
+</div>
+
+**Endpoints disponíveis:**
+- **POST /predict** — Avalia proposta de crédito (retorna score, decisão, SHAP)
+- **GET /metrics** — Retorna métricas de performance e calibração do modelo
+- **POST /psi** — Calcula PSI e monitora drift populacional
+- **GET /docs** — Documentação interativa (Swagger UI / OpenAPI)
+
+Todos os endpoints incluem validação de entrada, tratamento de erro e logging auditável.
+
+### 9. Relatório de Conformidade Regulatória
+
+O projeto inclui monitoramento contínuo de conformidade com regulações de crédito e proteção de dados.
+
+<div align="center">
+  <img src="plots/compliance_report.png" alt="Relatório de conformidade regulatória" width="950" />
+</div>
+
+**Regulações implementadas:**
+- **LGPD (Lei Geral de Proteção de Dados)**: Anonimização de PII, direito de explicabilidade
+- **Basileia III**: Calibração de PD, LGD, EAD conforme padrões bancários
+- **Fair Lending (EEOC)**: Testes de impacto disparatado, mitigação de discriminação
+
+O relatório é gerado mensalmente e auditado para garantir que o modelo continua alinhado com requisitos regulatórios.
+
 ## Importante: como as imagens aparecem no GitHub
 
 As imagens do README precisam apontar para arquivos que existam dentro do próprio repositório e usar caminhos relativos ao início do projeto. No caso deste repositório, os arquivos estão na pasta `plots/` e os links foram feitos assim:
