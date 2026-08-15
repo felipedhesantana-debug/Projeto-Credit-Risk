@@ -86,6 +86,10 @@ Abaixo estão os principais painéis do projeto e o que cada um representa na so
 
 A primeira tela mostra o score final do cliente, a faixa de decisão, o valor de pontuação e os indicadores principais de risco. Ela centraliza a decisão final: se o cliente está em zona de aprovação, atenção ou risco elevado.
 
+<div align="center">
+  <img src="plots/model_evaluation.png" alt="Avaliação do modelo" width="800" />
+</div>
+
 - score geral do cliente
 - classificação de decisão (aprovado, atenção ou risco)
 - indicadores de crédito e exposição
@@ -95,6 +99,10 @@ A primeira tela mostra o score final do cliente, a faixa de decisão, o valor de
 
 A segunda tela destaca os fatores que mais aumentam ou reduzem o risco do cliente. Esse gráfico é importante porque mostra, de forma interpretável, por que a predição foi feita.
 
+<div align="center">
+  <img src="plots/feature_importance.png" alt="Importância das features" width="800" />
+</div>
+
 - variáveis com impacto positivo e negativo sobre o risco
 - exemplo de fatores como duração do crédito, housing, checking account e credit amount
 - apoio para análise de negócio e conformidade
@@ -102,6 +110,10 @@ A segunda tela destaca os fatores que mais aumentam ou reduzem o risco do client
 ### 3. EDA e análise exploratória
 
 A terceira etapa mostra a distribuição dos dados, a relação entre idade e valor do crédito, e a comparação por categoria de risco. Essa tela ajuda a entender a base e detectar padrões antes do treinamento do modelo.
+
+<div align="center">
+  <img src="plots/eda_overview.png" alt="EDA do dataset" width="900" />
+</div>
 
 - distribuição de bons e maus pagadores
 - relação entre idade e valor do crédito
