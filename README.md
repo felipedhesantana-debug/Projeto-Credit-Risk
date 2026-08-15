@@ -15,7 +15,7 @@
 
 ## Visão geral
 
-Este repositório implementa um pipeline completo para avaliação de risco de crédito usando o dataset alemão de crédito. A solução combina análise exploratória, pré-processamento, treinamento de modelos, explicabilidade e uma interface para uso prático.
+Este repositório implementa um pipeline completo para avaliação de risco de crédito usando o dataset alemão de crédito. A solução combina análise exploratória, pré-processamento, treinamento de modelos, explicabilidade e uma interface para uso prático em ambiente de decisão financeira.
 
 O projeto foi pensado para demonstrar um fluxo realista de ML em produção, incluindo:
 
@@ -36,6 +36,15 @@ O projeto foi pensado para demonstrar um fluxo realista de ML em produção, inc
 - FastAPI
 - Streamlit / Dash
 - Docker
+
+### Principais entregáveis
+
+- EDA com análise estatística e visual
+- comparativo de modelos de classificação
+- explicabilidade de predição por feature impact
+- monitoramento de estabilidade com PSI
+- API REST para avaliação de crédito
+- dashboard para apoio à decisão
 
 ## Métricas do modelo
 
@@ -87,7 +96,7 @@ Abaixo estão os principais painéis do projeto e o que cada um representa na so
 A primeira tela mostra o score final do cliente, a faixa de decisão, o valor de pontuação e os indicadores principais de risco. Ela centraliza a decisão final: se o cliente está em zona de aprovação, atenção ou risco elevado.
 
 <div align="center">
-  <img src="plots/model_evaluation.png" alt="Avaliação do modelo" width="800" />
+  <img src="plots/model_evaluation.png" alt="Avaliação do modelo" width="860" />
 </div>
 
 - score geral do cliente
@@ -100,7 +109,7 @@ A primeira tela mostra o score final do cliente, a faixa de decisão, o valor de
 A segunda tela destaca os fatores que mais aumentam ou reduzem o risco do cliente. Esse gráfico é importante porque mostra, de forma interpretável, por que a predição foi feita.
 
 <div align="center">
-  <img src="plots/feature_importance.png" alt="Importância das features" width="800" />
+  <img src="plots/feature_importance.png" alt="Importância das features" width="860" />
 </div>
 
 - variáveis com impacto positivo e negativo sobre o risco
@@ -112,7 +121,7 @@ A segunda tela destaca os fatores que mais aumentam ou reduzem o risco do client
 A terceira etapa mostra a distribuição dos dados, a relação entre idade e valor do crédito, e a comparação por categoria de risco. Essa tela ajuda a entender a base e detectar padrões antes do treinamento do modelo.
 
 <div align="center">
-  <img src="plots/eda_overview.png" alt="EDA do dataset" width="900" />
+  <img src="plots/eda_overview.png" alt="EDA do dataset" width="920" />
 </div>
 
 - distribuição de bons e maus pagadores
