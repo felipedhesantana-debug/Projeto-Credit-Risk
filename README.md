@@ -1,60 +1,104 @@
 # Projeto-Credit-Risk
 
-# Projeto de Avaliação de Risco de Crédito (Credit Risk Assessment)
+<div align="center">
 
-Este repositório contém um pipeline completo de Machine Learning para avaliação e previsão de risco de crédito baseado no conjunto de dados [`german_credit_data.csv`](german_credit_data.csv).
+  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python" alt="Python" />
+  <img src="https://img.shields.io/badge/ML-Credit%20Risk-4B8BBE?style=for-the-badge" alt="Credit Risk" />
+  <img src="https://img.shields.io/badge/Status-Ready-2EA043?style=for-the-badge" alt="Ready" />
 
-## 📁 Estrutura do Projeto
+</div>
 
-```
+## Sobre o projeto
+
+Este repositório contém um pipeline completo de Machine Learning para avaliação e previsão de risco de crédito, utilizando o dataset de crédito alemão. O objetivo é classificar clientes em perfis de risco e apoiar decisões de crédito com base em indicadores financeiros e comportamentais.
+
+O projeto inclui:
+- análise exploratória de dados
+- tratamento de variáveis e preprocessing
+- treinamento de múltiplos modelos
+- comparação de métricas de avaliação
+- inferência em novos perfis
+- API e dashboard para uso prático
+
+## Modelo e métricas
+
+Os modelos avaliados incluem Regressão Logística, Random Forest e XGBoost. A comparação foi feita com foco em métricas relevantes para risco de crédito, especialmente recall para maus pagadores e área sob a curva ROC.
+
+| Modelo | ROC-AUC | Recall (maus pagadores) |
+|---|---:|---:|
+| XGBoost | 0.7850 | 71.67% |
+| Random Forest | 0.7739 | - |
+| Regressão Logística | 0.7607 | - |
+
+## Estrutura do repositório
+
+```text
 Projeto Credit Risk/
-├── german_credit_data.csv     # Dataset original
-├── eda.py                     # Script de Análise Exploratória de Dados
-├── predict.py                 # Script para inferência e simulação em novas propostas
-├── src/
-│   ├── preprocessing.py       # Pipeline de tratamento, imputação e encoding
-│   └── train_model.py         # Treinamento e avaliação de modelos (XGBoost, RF, RegLog)
+├── german_credit_data.csv          # Dataset original
+├── eda.py                          # Análise exploratória de dados
+├── predict.py                      # Simulação de inferência e predição
+├── requirements.txt                # Dependências do projeto
+├── Dockerfile                      # Container da aplicação
+├── docker-compose.yml              # Orquestração dos serviços
+├── README.md                       # Documentação do projeto
+├── .gitignore                      # Arquivos ignorados pelo Git
 ├── models/
-│   └── credit_risk_model.joblib # Artefato do melhor modelo treinado e preprocessor
-├── app/
-│   ├── api.py                 # API de inferência
-│   └── dashboard.py          # Dashboard interativo
+│   └── credit_risk_model.joblib   # Modelo treinado + pré-processador
 ├── plots/
-│   ├── eda_overview.png       # Visualizações da análise exploratória
-│   ├── model_evaluation.png   # Curvas ROC e Matriz de Confusão
-│   └── feature_importance.png # Gráfico de importância dos atributos
-├── Dockerfile                 # Container para execução da API
-├── docker-compose.yml         # Orquestração dos serviços
-├── requirements.txt           # Dependências do projeto
-├── README.md                 # Documentação do projeto
-└── .gitignore                # Arquivos ignorados pelo Git
+│   ├── eda_overview.png            # Visualizações da EDA
+│   ├── model_evaluation.png        # Métricas e avaliação do modelo
+│   └── feature_importance.png      # Importância das variáveis
+├── src/
+│   ├── preprocessing.py           # Pipeline de preprocessing
+│   ├── train_model.py             # Treinamento e validação
+│   ├── monitoring.py              # Monitoramento
+│   └── risk_engine.py             # Motor de risco e lógica de decisão
+├── app/
+│   ├── api.py                     # API para inferência
+│   └── dashboard.py               # Dashboard interativo
+└── LICENSE                        # Licença do projeto (se aplicável)
 ```
 
-## 🚀 Como Executar
+## Como executar
 
-### 1. Análise Exploratória (EDA)
-Gere estatísticas descritivas e relatórios visuais:
+### 1. Instalar dependências
+
 ```bash
-python3 eda.py
+pip install -r requirements.txt
 ```
-Os gráficos serão salvos na pasta `plots/`.
 
-### 2. Treinamento e Avaliação de Modelos
-Treine os modelos (Regressão Logística, Random Forest e XGBoost), avalie as métricas de crédito e salve o melhor modelo:
-```bash
-PYTHONPATH=src python3 src/train_model.py
-```
-Métricas geradas:
-- **XGBoost**: ROC-AUC: `0.7850`, Recall (Maus Pagadores): `71.67%`
-- **Random Forest**: ROC-AUC: `0.7739`
-- **Regressão Logística**: ROC-AUC: `0.7607`
+### 2. Executar a análise exploratória
 
-### 3. Simulação de Inferência (Predição de Risco)
-Rode simulações com novos perfis de solicitantes de crédito:
 ```bash
-PYTHONPATH=src python3 predict.py
+python eda.py
 ```
-Ou importe no seu próprio script:
+
+### 3. Treinar o modelo
+
+```bash
+PYTHONPATH=src python src/train_model.py
+```
+
+### 4. Fazer predição em novos perfis
+
+```bash
+PYTHONPATH=src python predict.py
+```
+
+### 5. Executar a API / dashboard
+
+```bash
+docker-compose up --build
+```
+
+Ou, em modo direto:
+
+```bash
+python app/api.py
+```
+
+## Exemplo de uso
+
 ```python
 from predict import predict_credit_risk
 
@@ -74,21 +118,28 @@ resultado = predict_credit_risk(cliente)
 print(resultado)
 ```
 
-### 4. Executar a API/Dashboard
-```bash
-docker-compose up --build
-```
-Ou, para executar direto:
-```bash
-python3 app/api.py
-```
+## Casos de uso
 
-## 📌 Objetivo do projeto
+- análise de risco de crédito para fintechs
+- apoio à decisão de aprovação/reprovação
+- benchmark de modelos em problemas de classificação binária
+- prototipagem para sistemas de crédito automatizados
 
-Este projeto demonstra um pipeline completo de machine learning para classificação de risco de crédito, incluindo:
-- preparação e engenharia de features
-- avaliação comparativa de modelos
-- otimização da decisão de crédito
-- inferência em novos perfis de clientes
-- pronto para publicação em GitHub e uso em ambientes de produção
+## Tecnologias utilizadas
+
+- Python
+- Pandas
+- Scikit-learn
+- XGBoost
+- Matplotlib / Seaborn
+- Docker
+- GitHub
+
+## Autor
+
+Felipe Santana
+
+## Licença
+
+Este projeto está disponível para uso educacional e de estudo. Ajuste a licença conforme a sua necessidade antes de uso comercial.
 
