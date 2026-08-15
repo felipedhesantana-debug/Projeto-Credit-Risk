@@ -148,6 +148,18 @@ A última parte mostra a interface da API para chamar o modelo em produção. El
 
 Essas telas deixam claro que o projeto não é apenas um modelo em notebook: é um fluxo real de produto de risco de crédito, com visão analítica, explicabilidade, monitoramento e integração via API.
 
+## Importante: como as imagens aparecem no GitHub
+
+As imagens do README precisam apontar para arquivos que existam dentro do próprio repositório e usar caminhos relativos ao início do projeto. No caso deste repositório, os arquivos estão na pasta `plots/` e os links foram feitos assim:
+
+```md
+![Avaliação do modelo](plots/model_evaluation.png)
+![Importância das features](plots/feature_importance.png)
+![EDA do dataset](plots/eda_overview.png)
+```
+
+Esse formato é o correto para o GitHub renderizar as imagens automaticamente no README. Se o caminho estiver errado, o arquivo estiver ausente ou não tiver sido enviado ao Git, a imagem não aparece. Por isso, os gráficos precisam estar commitados na branch principal e o README deve referenciar o mesmo nome do arquivo.
+
 ## Como executar
 
 ### 1. Clonar o repositório
